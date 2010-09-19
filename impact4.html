@@ -1,0 +1,47 @@
+<!-- saved from url=(0013)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>i4 Survey</title>
+
+
+<script type="text/javascript" src="Runtime/gateway/JavaScriptFlashGateway.js"></script>
+<script type="text/javascript" src="Runtime/javascript/ajax.js"></script>
+<style type="text/css">
+	#serverResponse {
+		display: none;
+	}
+	body,html {
+		margin: 0px;
+		padding: 0px;
+    	height:100%;
+	}
+</style>
+
+<script type="text/javascript">
+	function popit (a1) {
+		alert(a1);
+	}
+</script>
+</head>
+<body bgcolor="#ffffff">
+
+<script language="JavaScript">
+	var uid = new Date().getTime();
+	var flashProxy = new FlashProxy(uid, 'Runtime/gateway/JavaScriptFlashGateway.swf');
+
+	var secureOverride = true;
+    var tag = new FlashTag('impact4.swf', "100%", "100%"); // last two arguments are height and width
+    tag.setFlashvars('lcId='+uid);
+    tag.write(document);
+	
+//	Example call	
+//	flashProxy.call('myActionScriptFunction', 'my string', 123, true, new Date(), null);
+	flashProxy.call('setFoo');
+
+</script>
+
+<div id="serverResponse">&nbsp;</div>
+</body>
+</html>

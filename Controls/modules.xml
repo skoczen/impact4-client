@@ -1,0 +1,44 @@
+<modules>
+	<!-- I4's list of internal modules that it should load from the Controls directory -->
+	<!-- $Id: modules.xml,v 1.7 2003/06/26 05:10:25 abansod Exp $ -->
+	<module name="healthState_sg" />
+	<module name="standard2Across" />
+	<module name="training_vas1" />
+	<module name="library_SoundControl" />
+	<module name="transitionToFeedback" />
+	<module name="modFourAcross" />
+	<module name="transitionToJointCount" />
+	<module name="modTwoAcross" />
+	<module name="useDialogMod" />
+	<module name="regressionDisplayDB" />
+	<module name="vas" />
+	<module name="regressionDisplayGather" />
+	<module name="training_intro" />
+	<module name="vas_textLeft" />
+	<module name="regressionResults" />
+	<module name="training_sg1" />
+	<module name="widget_dropDown" />
+	<module name="saveData" />
+	<module name="training_transition1" />
+	<module name="widget_selectNumber" />
+	<module name="sg" />
+	<module name="training_transition2" />
+	<module name="sg_textLeft" />
+	<module name="training_transition3" />
+	<module name="probLooksLikeSG" />
+	<mouule name="remote_SoundControl" />
+	<module name="library_SoundControl"/>
+	<module name="restart" />
+	<module name="widget_checkbox" />
+	<module name="widget_inputText" />
+	<module name="widget_text" />
+	<module name="widget_selectBox" />
+	<module name="widget_selectNumber" />
+	<module name="widget_selectOneNumber" />
+	<module name="widget_slider" />	
+	<module name="wtp" />	
+	<module name="probStadium" />	
+	<module name="probabilityGrid" />
+	<module name="generateID" />	
+	<module name="widget_selectGrid" />
+</modules>

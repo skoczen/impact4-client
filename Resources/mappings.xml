@@ -1,0 +1,15 @@
+<serverValueMappings>
+
+	<serverMappings>
+		<server name="Local" server="Provider=Microsoft.Jet.OLEDB.4.0; Data Source=e:\\db\\sampleDB.mdb" driverType="OLE" valueName="_root.NID" idName = "NID" idTable = "test" valueFieldName = "NID" />
+	</serverMappings>
+
+	<valueMappings> 
+
+		<mappedField>
+			<i4 moduleName="sampleMod" fieldName="checkBoxValue"/>
+			<remoteServer serverName="Local" tableName="test" remotefieldName="int_data" remoteType ="integer" />
+		</mappedField>
+
+	</valueMappings> 
+</serverValueMappings>

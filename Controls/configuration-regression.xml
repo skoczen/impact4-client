@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<impact4>
+	<!-- This is the regression test configuration file -->
+	<!-- $Id: configuration-regression.xml,v 1.12 2003/10/04 22:29:16 abansod Exp $ -->
+	<!-- need a test of a library - perhaps the sound lib? -->
+	<!-- need a cachemanager test -->
+	<!-- need a more complex merge-branch-remerge-branch-merge test -->
+	<!-- need a % bar text -->
+	<!-- need a console test -->
+	<!-- need a shift > < test -->
+	<!-- need an encryption test -->
+	<!-- need a xmlsocket/urlclient test -->
+	<configuration>
+		<display allowback="true" allowquit="false">
+			<font size="+1" face="Verdana" />
+			<screen height="800" width="600" />
+			<titlebar text="-- REGRESSION MODE --" />
+		</display>
+		<property name="defaultModemBuffer" value="100" type="integer"/>
+		<property name="defaultIsdnBuffer" value="100" type="integer"/>
+		<property name="defaultCableBuffer" value="100" type="integer"/>
+		<property name="checkXMLValidity" value="true" type="boolean"/>
+		<property name="navType" value="full" type="string"/>
+		<property name="dumpDatabaseBeforeNavigation" value="false" type="boolean"/>
+		<property name="traceSetValue" value="true" type="boolean"/>
+		<property name="uniqueNameSize" value="64" type="integer"/>
+		<property name="enableGarbageCollection" value="true" type="boolean" />
+		<property name="enableNavigationCache" value="true" type="boolean" />
+		<property name="enableLinearRemoval" value="true" type="boolean" />
+		<property name="preloadMetadata" value="false" type="boolean" />
+		<property name="calculateProgressBar" value="true" type="boolean" />
+		<data projectName="regression">
+			<xmlsocketclient server="localhost" port="8080" />
+		</data>
+<!-- causes st to fail		<library name="library_SoundControl"/>-->
+	</configuration>
+	<navigation>
+	<set name="runtime.sectionText" value="--REGRESSION MODE--" />
+	<module type="regressionDisplayGather">
+		<const type="string" name="text" value="Welcome to the regression test xml. If you see this that means that no valid configuration.xml file was found, and the Impact4 Client is running in regression test mode.&lt;br&gt;&lt;br&gt;This could mean one of two things.&lt;br&gt;&lt;br&gt;1. The configuration.xml file was broken and un-parseable&lt;br&gt;2. This is a fresh build or CVS checkout without a survey attacted to it&lt;br&gt;&lt;br&gt;Click next to continue" />
+	</module>	
+
+	<module type="regressionDisplayGather">
+		<const type="string" name="text" value="In this regression suite, you will be asked to perform some simple tasks on Impact4 ranging from clicking next to typing in what appears on the screen. This is help evaluate the functionality of Impact4.&lt;br&gt;&lt;br&gt;The sequence will being in the next screen. Click next to continue." />
+	</module>
+
+
+	<set name="runtime.sectionText" value="REGRESSION MODE-- DATABASE" />
+	<module type="regressionDisplayGather" name="dbtestgather">
+		<const type="string" name="text" value="In the text box below type 'YES' or 'NO'. We will attempt to write it to the database and do a navigation test after that. Remember the answer you gave.&lt;br&gt;&lt;br&gt;Once you are done, click next to continue." />
+		<field type="string" name="value" />
+	</module>
+	<group>
+		<module type="regressionDisplayDB">
+			<const type="string" name="text" value="The text box below should show you the value you typed in. If this is correct, click Yes in the drop down, otherwise this is really bad, and the rest of this is pretty irrelevent if this part didn't work.&lt;br&gt;&lt;br&gt;If it did work, the next screen will be testing the navigation, so you'll be moved to a 'YES' branch, or a 'NO' branch, depending on what answer you gave." />
+			<const type="string" name="retval" value="dbtestgather.value" />
+		</module>
+		<module type="widget_dropDown" name="dbtest" x="200" y="500">
+			<const name="numItems" type="integer" value = "2" />
+			<const name="startingText" type="string" value = "Did you see your answer?" />
+			<const name="itemName1" type="string" value = "Yes" />
+			<const name="itemName2" type="string" value="No" />
+			<field name="selectedItemIndex" type="integer"  />
+		</module>
+	</group>
+
+	<!--
+	MAKE A JUMP TEST CASE
+	<set name="runtime.sectionText" value="REGRESSION MODE- JUMPS" />
+	<jump label="test_target" />
+	<jumplabel name="test_target" />
+		<group>
+			<module type="regressionDisplayGather">
+				<const type="string" name="text" value="You have jumped to this location." />
+			</module>
+			<module type="widget_dropDown" name="branchtest" x="200" y="500">
+				<const name="numItems" type="integer" value = "2" />
+				<const name="startingText" type="string" value = "Answer yes if you're here." />
+				<const name="itemName1" type="string" value = "Yes" />
+				<const name="itemName2" type="string" value="No" />
+				<field name="selectedItemIndex" type="integer"  />
+			</module>
+		</group>
+	<jumpreturn />
+	-->
+
+
+	<set name="runtime.sectionText" value="REGRESSION MODE-- NAVIGATION" />
+	<condition lval="dbtestgather.value" operation="equals" rval="YES" >
+		<true>
+			<group>
+				<module type="regressionDisplayGather">
+					<const type="string" name="text" value="This is the YES branch. If this was your given answer, click yes in the drop down, otherwise click no. Then click next to continue." />
+				</module>
+				<module type="widget_dropDown" name="branchtest" x="200" y="500">
+					<const name="numItems" type="integer" value = "2" />
+					<const name="startingText" type="string" value = "Was your given answer yes?" />
+					<const name="itemName1" type="string" value = "Yes" />
+					<const name="itemName2" type="string" value="No" />
+					<field name="selectedItemIndex" type="integer"  />
+				</module>
+			</group>
+		</true>
+		<false>
+			<group>
+				<module type="regressionDisplayGather">
+					<const type="string" name="text" value="This is the NO branch. If this was your given answer, click yes in the drop down, otherwise click no. Then click next to continue." />
+				</module>
+				<module type="widget_dropDown" name="branchtest" x="200" y="500">
+					<const name="numItems" type="integer" value = "2" />
+					<const name="startingText" type="string" value = "Was your given answer no?" />
+					<const name="itemName1" type="string" value = "Yes" />
+					<const name="itemName2" type="string" value="No" />
+					<field name="selectedItemIndex" type="integer"  />
+				</module>
+			</group>
+		</false>
+	</condition>
+
+	<!-- NEED TO MAKE REMERGE TEST MORE THOROUGH -->
+	<set name="runtime.sectionText" value="REGRESSION MODE-- REMERGE" />
+	<group>
+		<module type="regressionDisplayGather">
+			<const type="string" name="text" value="Click yes if you simply SAW the YES or NO branch screens, regardless of whether you saw the correct one. This means that you've successfully remerged into the main navigation timeline." />
+		</module>
+		<module type="widget_dropDown" name="remergetest" x="200" y="500">
+			<const name="numItems" type="integer" value = "2" />
+			<const name="startingText" type="string" value = "Did you simply see a branch?" />
+			<const name="itemName1" type="string" value = "Yes" />
+			<const name="itemName2" type="string" value="No" />
+			<field name="selectedItemIndex" type="integer"  />
+		</module>
+	</group>
+	<set name="runtime.sectionText" value="REGRESSION MODE-- ALIASES" />
+	<group>
+		<module type="regressionDisplayDB">
+			<const type="string" name="text" value="This test is to see if the module names correctly captured your value in an orthogonal branch. The text box below the number '1' if the you said Yes to the drop down in the branch test, or '2' if it didn't. If this is correct, click Yes in the drop down, or else click no.&lt;br&gt;&lt;br&gt;Click next to continue." />
+			<const type="string" name="retval" value="branchtest.selectedItemIndex" />
+		</module>
+		<module type="widget_dropDown" name="aliastest" x="200" y="500">
+			<const name="numItems" type="integer" value = "2" />
+			<const name="startingText" type="string" value = "Was your answer captured properly?" />
+			<const name="itemName1" type="string" value = "Yes" />
+			<const name="itemName2" type="string" value="No" />
+			<field name="selectedItemIndex" type="integer"  />
+		</module>
+	</group>
+	<set name="runtime.sectionText" value="REGRESSION MODE-- LOADER/BOOTSTRAP" />
+	<group>
+		<module type="regressionDisplayGather">
+			<const type="string" name="text" value="Click yes if all the screens you've been seeing have been behaving 'normally'. This means no wierd pop-ups giving errors or artifacts of other screens appearing in later screens. Also make sure that the big text boxes and the drop downs both appear on the screen." />
+		</module>
+		<module type="widget_dropDown" name="loadertest" x="200" y="500">
+			<const name="numItems" type="integer" value = "2" />
+			<const name="startingText" type="string" value = "Did everything look okay?" />
+			<const name="itemName1" type="string" value = "Yes" />
+			<const name="itemName2" type="string" value="No" />
+			<field name="selectedItemIndex" type="integer"  />
+		</module>
+	</group>
+	<set name="runtime.sectionText" value="REGRESSION MODE-- CACHEMANAGER" />
+	<group>
+		<module type="regressionDisplayGather">
+			<const type="string" name="text" value="There is no cachemanager test right now. Click next." />
+		</module>
+<!--		<module type="widget_dropDown" name="remergetest" x="200" y="500">
+			<const name="numItems" type="integer" value = "2" />
+			<const name="startingText" type="string" value = "Did it work?" />
+			<const name="itemName1" type="string" value = "Yes" />
+			<const name="itemName2" type="string" value="No" />
+			<field name="selectedItemIndex" type="integer"  />
+		</module>-->
+	</group>
+	<set name="runtime.sectionText" value="REGRESSION MODE-- RESULTS" />
+	<module type="regressionResults" />
+	</navigation>
+</impact4>
