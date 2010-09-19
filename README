@@ -1,0 +1,10 @@
+This repository is the base for impact4 surveys.
+
+To use impact4 (i4), create a configuration.xml file in the resources folder.
+
+i4 is a powerful, nonlinear survey framework with back-end data support.  Its documentation is sparse, and like many projects, its source code has been spread around.  Hopefully that will improve.
+
+As of September 2010, this repository is the canonical place for the i4 client.
+
+To create a survey, checkout a copy of the client, and edit your configuration.xml as needed.
+
