@@ -41,4 +41,5 @@
 	<module name="probabilityGrid" />
 	<module name="generateID" />	
 	<module name="widget_selectGrid" />
+	<module name="ttoTraditional" />	
 </modules>
