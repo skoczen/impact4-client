@@ -306,12 +306,21 @@ function nextBidValue () {
 	
 	switch (searchMethod) {
 		case "ping-pong":
-			if ( (currentBid-currentLowAnchor) > (currentHighAnchor-currentBid) ) { 
-				// we just asked a high question
-				newBid = currentLowAnchor + bidAdjustAmount;
-			} else {
-				newBid = currentHighAnchor - bidAdjustAmount;
-			}
+            // special-case the first question
+		    if (numSearches == 1 && currentBid == currentLowAnchor) {
+		        newBid = highAnchor;
+            } else {
+	            if (numSearches == 1 && currentBid == currentHighAnchor) {
+		            newBid = lowAnchor;
+	            } else {
+        			if ( (currentBid-currentLowAnchor) > (currentHighAnchor-currentBid) ) { 
+        				// we just asked a high question
+        				newBid = currentLowAnchor + bidAdjustAmount;
+        			} else {
+        				newBid = currentHighAnchor - bidAdjustAmount;
+        			}
+        		}
+		    }
 		break;
 		
 		case "titrate up":
