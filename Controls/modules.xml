@@ -1,44 +1,208 @@
 <modules>
-	<!-- I4's list of internal modules that it should load from the Controls directory -->
-	<!-- $Id: modules.xml,v 1.7 2003/06/26 05:10:25 abansod Exp $ -->
-	<module name="healthState_sg" />
-	<module name="standard2Across" />
-	<module name="training_vas1" />
-	<module name="library_SoundControl" />
-	<module name="transitionToFeedback" />
-	<module name="modFourAcross" />
-	<module name="transitionToJointCount" />
-	<module name="modTwoAcross" />
-	<module name="useDialogMod" />
-	<module name="regressionDisplayDB" />
-	<module name="vas" />
-	<module name="regressionDisplayGather" />
-	<module name="training_intro" />
-	<module name="vas_textLeft" />
-	<module name="regressionResults" />
-	<module name="training_sg1" />
-	<module name="widget_dropDown" />
-	<module name="saveData" />
-	<module name="training_transition1" />
-	<module name="widget_selectNumber" />
-	<module name="sg" />
-	<module name="training_transition2" />
-	<module name="sg_textLeft" />
-	<module name="training_transition3" />
-	<module name="probLooksLikeSG" />
-	<mouule name="remote_SoundControl" />
-	<module name="library_SoundControl"/>
-	<module name="restart" />
-	<module name="widget_checkbox" />
-	<module name="widget_inputText" />
-	<module name="widget_text" />
-	<module name="widget_selectBox" />
-	<module name="widget_selectNumber" />
-	<module name="widget_selectOneNumber" />
-	<module name="widget_slider" />	
-	<module name="wtp" />	
-	<module name="probStadium" />	
-	<module name="probabilityGrid" />
-	<module name="generateID" />	
-	<module name="widget_selectGrid" />
+	<!-- I4's list of internal modules that it should load from the Controls directory, also used for the i4 builder -->
+	<!-- Builder RELIES on the order of the widget_text fields.  DO NOT change them!!-->
+	<module name="widget_text"			friendlyName="Text Block" >
+		<param name="width" 			type="integer" 		mode="const"		defaultValue="500"									helpText="Width of the text box"/>
+		<param name="height" 			type="integer" 		mode="const"		defaultValue="300"									helpText="Height of the text box"/>
+		<param name="sideToAutoSize" 	type="string" 		mode="const"		defaultValue="left"									helpText="Size to resize. Options:[left, right, center]"/>
+		<param name="textType" 			type="string" 		mode="const"		defaultValue="HTML"									helpText="Plain text or HTML text mode.  Options:[HTML,plaintext]"/>
+		<param name="textValue" 		type="cdata" 		mode="const"		defaultValue="Sample Text\nSample Text Sample Text"	helpText="Text to be displayed."/>
+	</module>
+	<module name="vas" 					friendlyName="Visual Analog Scale">
+		<param name="vasValue" 			type="integer"		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+		<param name="initialPercent" 	type="integer"		mode="const"		defaultValue="50"									helpText="Percentage to start the scale at."/>
+		<param name="topAnchorText" 	type="string" 		mode="const"		defaultValue="Perfect Health"						helpText="Text to show above the scale"/>
+		<param name="bottomAnchorText" 	type="string" 		mode="const"		defaultValue="Death"								helpText="Text to show below the scale"/>
+		<param name="forceAnswer" 		type="boolean" 		mode="const"		defaultValue="false"								helpText="Require the user to answer?  Check is yes."/>
+	</module>
+	<module name="training_vas1" 		friendlyName="Visual Analog Scale Training Helper"/>
+	<module name="sg" friendlyName="Standard Gamble">
+		<param name="option1text" 		type="string" 		mode="const"		defaultValue="Perfect Health"						helpText="Text to show for the top option"/>
+		<param name="option2text" 		type="string" 		mode="const"		defaultValue="Death"								helpText="Text to show for the bottom option"/>
+		<param name="topButtonLabel" 	type="string" 		mode="const"		defaultValue="More Risk"							helpText="Text to show next to the + button"/>
+		<param name="bottomButtonLabel"	type="string" 		mode="const"		defaultValue="Less Risk"							helpText="Text to show next to the - button"/>
+		<param name="forceAnswer" 		type="boolean" 		mode="const"		defaultValue="false"								helpText="Require the user to answer? Check is yes."/>
+		<param name="buttonPrompt" 		type="string" 		mode="const"		defaultValue="Change Risk:"						helpText="Text above the + and - buttons"/>
+		<param name="riskOfDeath" 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+	</module>                                                                                  			
+	<module name="training_sg1" 		friendlyName="Standard Gamble Training Helper"/>       			
+	<module name="probLooksLikeSG"		friendlyName="A Non-titrating Standard Gamble" >       			
+		<param name="option1text" 		type="string" 		mode="const"		defaultValue="Good Course"							helpText="Text to show for the top option"/>
+		<param name="option2text" 		type="string" 		mode="const"		defaultValue="Bad Course"							helpText="Text to show for the bottom option"/>
+		<param name="forceAnswer" 		type="boolean" 		mode="const"		defaultValue="false"								helpText="Require the user to answer? Check is yes."/>
+		<param name="riskOfDeath" 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>                                           	
+	</module>                                                                                  			
+	<module name="probTwoBoxes"		friendlyName="A two-box probability tool" >                			
+		<param name="option1text" 		type="string" 		mode="const"		defaultValue="Good Course"							helpText="Text to show for the left option"/>
+		<param name="option2text" 		type="string" 		mode="const"		defaultValue="Bad Course"							helpText="Text to show for the right option"/>
+		<param name="forceAnswer" 		type="boolean" 		mode="const"		defaultValue="false"								helpText="Require the user to answer? Check is yes."/>
+		<param name="riskOfDeath" 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>                                          
+	</module>
+	<module name="jointCount"		friendlyName="Joint Pain and Swelling tool" >                			
+		<param name="jointResponseHash" 		type="string" 		mode="const"		defaultValue=""							helpText="A comma separated hash of the user responses."/>
+		<param name="numPainfulAndSwelling" 		type="integer" 		mode="variable"		defaultValue=""							helpText="Number of painful and swollen joints"/>
+		<param name="numPainful" 		type="integer" 		mode="variable"		defaultValue=""								helpText="Number of painful joints"/>
+		<param name="numSwollen" 		type="integer" 		mode="variable"		defaultValue=""										helpText="Number of swollen joints"/>                                          
+	</module>                                                                   
+	<module name="widget_dropDown" 		friendlyName="Drop-Down List">                         			
+		<param name="numItems" 			type="integer" 		mode="const"		defaultValue="3"									helpText="Number of items in the list"/>
+		<param name="startingText" 		type="string" 		mode="const"		defaultValue="Click to select an option"			helpText="The text to display before anything is selected"/>
+		<param name="requireAnswer" 	type="boolean" 		mode="const"		defaultValue="false"								helpText="Require the user to answer? Check is yes."/>
+		<param name="itemName1" 		type="string" 		mode="const"		defaultValue="Option 1 text here"					helpText="The text for option 1"/>
+		<param name="itemName2" 		type="string" 		mode="const"		defaultValue="Option 2 text here"					helpText="The text for option 2"/>
+		<param name="itemName3" 		type="string" 		mode="const"		defaultValue="Option 3 text here"					helpText="The text for option 3"/>
+		<param name="itemName4" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 4"/>
+		<param name="itemName5" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 5"/>
+		<param name="itemName6" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 6"/>
+		<param name="itemName7" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 7"/>
+		<param name="itemName8" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 8"/>
+		<param name="itemName9" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 9"/>
+		<param name="itemName10" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 10"/>
+		<param name="itemName11" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 11"/>
+		<param name="itemName12" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 12"/>
+		<param name="itemName13" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 13"/>
+		<param name="itemName14" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 14"/>
+		<param name="itemName15" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 15"/>
+		<param name="selectedItemIndex" type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+	</module>	                                                                               			
+	<module name="widget_selectNumber"	friendlyName="Number Selector">                        			
+		<param name="numDigits" 		type="integer" 		mode="const"		defaultValue="4"									helpText="Number of digits to display"/>
+		<param name="value" 			type="integer" 		mode="variable"		defaultValue="2007"									helpText="Variable to save"/>
+	</module>	                                                                               			
+	<module name="widget_checkbox"		friendlyName="Check Box and Label">                    			
+		<param name="checkBoxValue" 	type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+		<param name="label" 			type="string" 		mode="const"		defaultValue="Checkbox label text"					helpText="Text to the right of the checkbox"/>
+	</module>                                                                                  			
+	<module name="widget_inputText"		friendlyName="Single-line Text Input">                 			
+		<param name="inputName" 		type="string" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+		<param name="maxChars" 			type="integer" 		mode="const"		defaultValue="30"									helpText="Maximum number of characters to accept."/>
+	</module>	                                                                               			            				
+	<module name="widget_selectBox" 	friendlyName="Select-across Boxes">                    			
+		<param name="numItems" 			type="integer" 		mode="const"		defaultValue="3"									helpText="Number of items in the list"/>
+		<param name="itemName1" 		type="string" 		mode="const"		defaultValue="Option 1"								helpText="The text for option 1"/>
+		<param name="itemName2" 		type="string" 		mode="const"		defaultValue="Option 2"								helpText="The text for option 2"/>
+		<param name="itemName3" 		type="string" 		mode="const"		defaultValue="Option 3"								helpText="The text for option 3"/>
+		<param name="itemName4" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 4"/>
+		<param name="itemName5" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 5"/>
+		<param name="itemName6" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 6"/>
+		<param name="selectedItemIndex" type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+	</module>  
+	<module name="widget_selectGrid" 	friendlyName="Multiple Select Grid">                    			
+		<param name="numQuestions" 		type="integer" 		mode="const"		defaultValue="5"									helpText="Number of questions (rows)"/>
+		<param name="numColumns" 		type="integer" 		mode="const"		defaultValue="3"									helpText="Number of answers (columns)"/>
+		<param name="question1" 		type="string" 		mode="const"		defaultValue="Question 1"							helpText="The text for question 1"/>
+		<param name="question2" 		type="string" 		mode="const"		defaultValue="Question 2"							helpText="The text for question 2"/>
+		<param name="question3" 		type="string" 		mode="const"		defaultValue="Question 3"							helpText="The text for question 3"/>
+		<param name="question4" 		type="string" 		mode="const"		defaultValue="Question 4"							helpText="The text for question 4"/>
+		<param name="question5" 		type="string" 		mode="const"		defaultValue="Question 5"							helpText="The text for question 5"/>
+		<param name="question6" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for question 6"/>
+		<param name="question7" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for question 7"/>
+		<param name="question8" 		type="string" 		mode="const"		defaultValue=""										helpText="The text for question 8"/>
+		<param name="column1"	 		type="string" 		mode="const"		defaultValue="Option 1"								helpText="The text for option 1"/>
+		<param name="column2"	 		type="string" 		mode="const"		defaultValue="Option 2"								helpText="The text for option 2"/>
+		<param name="column3"	 		type="string" 		mode="const"		defaultValue="Option 3"								helpText="The text for option 3"/>
+		<param name="column4"	 		type="string" 		mode="const"		defaultValue=""								helpText="The text for option 4"/>
+		<param name="column5"	 		type="string" 		mode="const"		defaultValue=""								helpText="The text for option 5"/>
+		<param name="column6"	 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 6"/>
+		<param name="column7"	 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 7"/>
+		<param name="column8"	 		type="string" 		mode="const"		defaultValue=""										helpText="The text for option 8"/>
+		<param name="answer1"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 1"/>
+		<param name="answer2"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 2"/>
+		<param name="answer3"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 3"/>
+		<param name="answer4"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 4"/>
+		<param name="answer5"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 5"/>
+		<param name="answer6"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 6"/>
+		<param name="answer7"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 7"/>
+		<param name="answer8"	 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save for Question 8"/>
+	</module>                                                                                			
+	<module name="widget_slider" 		friendlyName="Sliding Scale">	                       			
+		<param name="leftAnchor" 		type="integer" 		mode="const"		defaultValue="0"									helpText="Lowest value for the scale"/>
+		<param name="rightAnchor" 		type="integer" 		mode="const"		defaultValue="10"									helpText="Highest value for the scale"/>
+		<param name="leftAnchorText" 	type="string" 		mode="const"		defaultValue="Left Anchor Text"						helpText="Text to the left of the scale"/>
+		<param name="rightAnchorText"	type="string" 		mode="const"		defaultValue="Right Anchor Text"					helpText="Text to the right of the scale"/>
+		<param name="decimalAccuracy" 	type="integer" 		mode="const"		defaultValue="0"									helpText="How many decimal places to record"/>
+		<param name="sliderValue" 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+	</module>                                                                                  			
+	<module name="wtp" 					friendlyName="Willingness to Pay (Narrowing scale)">   			 
+		<param name="lowAnchor" 		type="integer" 		mode="const"		defaultValue="0"									helpText="Text for the left (low) anchor"/>
+		<param name="highAnchor" 		type="integer" 		mode="const"		defaultValue="10"									helpText="Text for the left (high) anchor"/>
+		<param name="questionStart" 	type="string" 		mode="const"		defaultValue="Would you be willing to pay "			helpText="The start of the question (before the currency). Include any trailing spaces."/>
+		<param name="questionEnd" 		type="string" 		mode="const"		defaultValue=" for this treatment?"					helpText="The end of the question (after the value)"/>
+		<param name="currencyStart" 	type="string" 		mode="const"		defaultValue="$"									helpText="Currency symbols before the number"/>
+		<param name="currencyEnd" 		type="string" 		mode="const"		defaultValue=""										helpText="Currency symbols after the number"/>
+		<param name="searchMethod" 		type="string" 		mode="const"		defaultValue="ping-pong"							helpText="Search method. Options[ping-pong, titrate up, titrate down, random, randomFullRange, bisection]"/>
+																																			<!-- options: 'ping-pong','titrate up','titrate down', 'random','randomFullRange', bisection -->
+		<param name="resolutionType" 	type="string" 		mode="const"		defaultValue="percent"								helpText="Type of resolution to reach. Options[percent,absolute]"/><!--  '%'/'percent' or 'absolute' -->
+		<param name="resolutionValue" 	type="integer" 		mode="const"		defaultValue="5"									helpText="Value of the required resolution (i.e. 5)"/><!--  The value of the required resolution -->
+
+		<param name="startPoint" 		type="integer" 		mode="const"		defaultValue=""										helpText="Value to start at. Leave blank for the auto-default."/>
+																																			<!-- Default: depends on the searchMethod. ping-pong, titrade down: highAnchor; titrate up: lowAnchor; random: random; bisection: middle. -->
+		<param name="bidAdjustType" 	type="string" 		mode="const"		defaultValue="percent"								helpText="Type of adjustment to make in titration or pingpong mode. Options[percent, absolute]"/>
+																																			<!-- If in titration or pingpong modes, this indicates the type of adjustment ('%'/'percent' or 'absolute') -->
+		<param name="bidAdjustPercent"	type="integer" 		mode="const"		defaultValue="10"									helpText="Amount to adjust the bid in titration or ping pong modes."/>
+		<param name="roundingIncrement"	type="integer" 		mode="const"		defaultValue="2"									helpText="Where to round the final number. E.g. A value of 2 will round to increments of 0.5"/>
+																																			<!-- What the final number should be multiplied, rounded, then divided by.  (i.e. a value of 2 will round to n.0 or n.5 . -->
+		<param name="numRandomTurns" 	type="integer" 		mode="const"		defaultValue=""										helpText="If using the random search method, the maximum number of turns, assuming resolution is not reached."/>
+																																			<!--If in random searchMethod, this is the number of times you want to present a choice.  -->
+		<param name="finalBid" 			type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+	</module>                                                                                  			
+	<module name="probabilityGrid" 		friendlyName="Probability Visualizer (0.1-100%)">      			
+		<param name="numColumns" 		type="integer" 		mode="const"		defaultValue="10"									helpText="Number of Columns"/>
+		<param name="numRows" 			type="integer" 		mode="const"		defaultValue="10"									helpText="Number of Rows"/>
+		<param name="numAffected" 		type="integer" 		mode="const"		defaultValue="50"									helpText="Total number of boxes to show affected"/>
+		<param name="textCaption" 		type="string" 		mode="const"		defaultValue="A sample caption"						helpText="The caption to show below the grid."/>
+	</module>                                                                                  			
+	<module name="probStadium" 			friendlyName="Stadium Low-Risk Visualizer (&lt;0.1%)"> 			 
+		<param name="moduleMode" 		type="string" 		mode="const"		defaultValue="graphic"								helpText="This module can function either as a graphic to display risk, or a tool to get user input. Options:[graphic, tool]"/>  <!-- Options: 'graphic' or 'tool' -->
+		<param name="riskTotalSize" 	type="integer" 		mode="const"		defaultValue="10000"								helpText="Total number in the crowd (i.e. 10000)"/>  <!-- total number in the crowd (i.e. 10,000) -->
+		<param name="riskNumAffected" 	type="integer" 		mode="const"		defaultValue="20"									helpText="The number of people affected at the start. "/>  <!-- the  number currently affected (i.e. 15) -->
+		<param name="minRiskProb" 		type="integer" 		mode="const"		defaultValue="0.001"								helpText="The minimum risk (0 to 1, i.e. 0.001)"/> 	<!--minimum risk amount (absolute 0to1).  (i.e. 0.001) -->
+		<param name="maxRiskProb" 		type="integer" 		mode="const"		defaultValue="25"									helpText="The maximum risk (0 to 1, max of 0.25)"/> 	<!--maximum risk amount (absolute 0to1).  (i.e. 0.25) -->
+		<param name="textMoreRisk" 		type="string" 		mode="const"		defaultValue="More Risk"							helpText="Text to display for more risk"/>
+		<param name="textLessRisk" 		type="string" 		mode="const"		defaultValue="Less Risk"							helpText="Text to display for less risk"/>
+		<param name="questionText" 		type="string" 		mode="const"		defaultValue="Please indicate the amount of risk you would be willing to take."		helpText=""/>
+		<param name="numIncrements"		type="integer" 		mode="const"		defaultValue=""										helpText="How many increments to use between the low and high risk values"/>
+		<param name="finalProb" 		type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to Save"/>
+	</module>	                                                                               			
+	<module name="library_SoundControl" friendlyName="Sound Controller Library (include once)"/>
+	<module name="remote_SoundControl" friendlyName="Sound Controller Remote (include for each screen where you want sound) ">
+		<param name="trackURL" 			type="string" 		mode="const"		defaultValue=""										helpText="URL of the track (scoping assumes file is in /Resources"/> 	<!-- URL of the track (scoping assumes file is in /Resources-->
+		<param name="trackName" 		type="string" 		mode="const"		defaultValue=""										helpText="Text that describes the sound file"/> 	<!-- Text that describes the sound file-->
+		<param name="trackPlayLength" 	type="string" 		mode="const"		defaultValue=""										helpText="Length of track. Format is m:ss."/>	<!-- Length of track. Format is m:ss.  -->
+		<param name="trackVolume" 		type="include" 		mode="const"		defaultValue="100"									helpText="Volume of playback. (0-100,0 is silence).  Defaults to 100."/>	<!-- Volume of playback. (0-100,0 is silence).  Defaults to 100.-->
+		<param name="trackDoneAction" 	type="string" 		mode="const"		defaultValue=""					   					helpText="Function to call when the track finishes playing.  Scoping needs to be correct. Optional."/>	<!-- Function to call when the track finishes playing.  Scoping needs to be correct. Optional.-->
+		<param name="controlPlayPause" 	type="boolean" 		mode="const"		defaultValue="true"				   					helpText="Show the play/pause control. True shows, False hides.  Boolean,defaults to True."/> 	<!-- Show the play/pause control. True shows, False hides.  Boolean,defaults to True.-->
+		<param name="controlRewind" 	type="boolean" 		mode="const"		defaultValue="true"				   					helpText="Show the rewind control. True shows, False hides.  Boolean,defaults to True."/> 	<!-- Show the rewind control. True shows, False hides.  Boolean,defaults to True.-->
+		<param name="controlMute" 		type="boolean" 		mode="const"		defaultValue="true"				   					helpText="Show the mute control. True shows, False hides.  Boolean,defaults to True."/> 	<!-- Show the mute control. True shows, False hides.  Boolean,defaults to True. -->
+		<param name="controlStop"		type="boolean" 		mode="const"		defaultValue="true"				   					helpText="Show the stop control."/>	<!-- Show the stop control. -->
+	</module>
+	<module name="ttoTraditional" >
+		<param name="lowAnchor" 		type="integer" 		mode="const"		defaultValue="0"									helpText="Text for the left (low) anchor"/>
+		<param name="highAnchor" 		type="integer" 		mode="const"		defaultValue="10"									helpText="Text for the left (high) anchor"/>
+		<param name="questionStart" 	type="string" 		mode="const"		defaultValue="Would you be willing to pay "			helpText="The start of the question (before the currency). Include any trailing spaces."/>
+		<param name="questionEnd" 		type="string" 		mode="const"		defaultValue=" for this treatment?"					helpText="The end of the question (after the value)"/>
+		<param name="currencyStart" 	type="string" 		mode="const"		defaultValue="$"									helpText="Currency symbols before the number"/>
+		<param name="currencyEnd" 		type="string" 		mode="const"		defaultValue=""										helpText="Currency symbols after the number"/>
+		<param name="searchMethod" 		type="string" 		mode="const"		defaultValue="ping-pong"							helpText="Search method. Options[ping-pong, titrate up, titrate down, random, randomFullRange, bisection]"/>
+																																			<!-- options: 'ping-pong','titrate up','titrate down', 'random','randomFullRange', bisection -->
+		<param name="resolutionType" 	type="string" 		mode="const"		defaultValue="percent"								helpText="Type of resolution to reach. Options[percent,absolute]"/><!--  '%'/'percent' or 'absolute' -->
+		<param name="resolutionValue" 	type="integer" 		mode="const"		defaultValue="5"									helpText="Value of the required resolution (i.e. 5)"/><!--  The value of the required resolution -->
+
+		<param name="startPoint" 		type="integer" 		mode="const"		defaultValue=""										helpText="Value to start at. Leave blank for the auto-default."/>
+																																			<!-- Default: depends on the searchMethod. ping-pong, titrade down: highAnchor; titrate up: lowAnchor; random: random; bisection: middle. -->
+		<param name="bidAdjustType" 	type="string" 		mode="const"		defaultValue="percent"								helpText="Type of adjustment to make in titration or pingpong mode. Options[percent, absolute]"/>
+																																			<!-- If in titration or pingpong modes, this indicates the type of adjustment ('%'/'percent' or 'absolute') -->
+		<param name="bidAdjustPercent"	type="integer" 		mode="const"		defaultValue="10"									helpText="Amount to adjust the bid in titration or ping pong modes."/>
+		<param name="roundingIncrement"	type="integer" 		mode="const"		defaultValue="2"									helpText="Where to round the final number. E.g. A value of 2 will round to increments of 0.5"/>
+																																			<!-- What the final number should be multiplied, rounded, then divided by.  (i.e. a value of 2 will round to n.0 or n.5 . -->
+		<param name="numRandomTurns" 	type="integer" 		mode="const"		defaultValue=""										helpText="If using the random search method, the maximum number of turns, assuming resolution is not reached."/>
+																																			<!--If in random searchMethod, this is the number of times you want to present a choice.  -->
+		<param name="finalBid" 			type="integer" 		mode="variable"		defaultValue=""										helpText="Variable to save"/>
+	</module>
+	<module name="saveData" 			friendlyName="Save all data to the server (if not saving live.)"/>
+	<module name="restart" 				friendlyName="Restart impact4."/>
+	<module name="generateID" 			friendlyName="Generate a Timestamp-based ID"/>	
+	<module name="regressionDisplayDB" 	friendlyName="Regression Suite - Display the DB"/>
+	<module name="regressionDisplayGather" friendlyName="Regression Suite - Gather Data" />
+	<module name="regressionResults" 	friendlyName="Regression Suite - Test Results"/>
 </modules>
